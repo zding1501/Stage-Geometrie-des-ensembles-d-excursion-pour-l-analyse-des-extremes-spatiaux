@@ -8,7 +8,7 @@ On construit le modèle mathématique suivant. Soit $(\Omega, \mathcal{F}, \math
 
 On définit l'**ensemble d'excursion** de $X$ pour un seuil $u$ :
 
-$$E_X(u,t) = \{s \in D \mid X(s,t) > u\}.$$
+$$E_X(u) = \{s \in D, t \in [0,T] \mid X(s,t) > u\}.$$
 
 ### Choix du seuil
 
@@ -18,6 +18,8 @@ Deux types de seuil sont utilisés pour définir ces ensembles :
 - **seuil spatial** : un seuil propre à chaque localisation, $u(\alpha, s) = \hat{q}_\alpha(\{X(s,t) : t \in [0,T]\})$, calculé à partir des seules observations temporelles au point $s$. Ce seuil s'adapte à la climatologie locale de chaque point de la grille plutôt que d'imposer un niveau uniforme sur tout le domaine.
 
 On s'intéresse aux fonctionnelles géométriques de l'ensemble d'excursion pour chaque date $t$ :
+
+$$E_X(u,t) = \{s \in D \mid X(s,t) > u\}.$$
 
 - l'**aire** $A_t$,
 - le **périmètre** $P_t$,
@@ -39,6 +41,7 @@ La validation est faite hors échantillon : estimation sur la période **1986–
 | Fichier | Description |
 |---|---|
 | `code_ziqin.ipynb` | Notebook principal : construction de la grille, calcul des composantes connexes et fonctionnelles géométriques, analyse de qualité temporelle, calcul des résidus QQ, classification des stations |
+| [`Rapport_Stage_M2_Ziqin_Ding.pdf`](Rapport_Stage_M2_Ziqin_Ding.pdf) | Rapport complet du stage (rédaction mathématique, méthodologie et interprétation des résultats) |
 
 ## Données
 
@@ -62,4 +65,4 @@ Les données SAFRAN utilisées pour ce projet sont disponibles ici : [Google Dri
 
 Python (`pandas`, `NumPy`, `matplotlib`, `statsmodels`, `scikit-learn`), notamment `sklearn.metrics.pairwise.haversine_distances` et `statsmodels.tsa.ar_model.AutoReg`.
 
-Le rapport complet (rédaction mathématique et interprétation des résultats) est rédigé séparément en LaTeX.
+Le rapport complet est disponible dans ce dépôt : [`Rapport_Stage_M2_Ziqin_Ding.pdf`](Rapport_Stage_M2_Ziqin_Ding.pdf).
