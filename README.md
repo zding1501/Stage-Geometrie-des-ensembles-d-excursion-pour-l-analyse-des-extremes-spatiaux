@@ -4,18 +4,33 @@ Ce dépôt contient le code Python développé dans le cadre d'un **stage de M2*
 
 ## Contexte scientifique
 
-On modélise les observations climatiques comme un champ aléatoire spatio-temporel $X(s,t)$. Après une **transformation de Pareto marginale**
+On construit le modèle mathématique suivant. Soit $(\Omega, \mathcal{F}, \mathbb{P})$ un espace de probabilité. Soit $X : \mathbb{R}^2 \times [0,T] \times \Omega \to \mathbb{R}$ un champ aléatoire défini sur $\mathbb{R}^2 \times [0,T]$. Soit $D \subset \mathbb{R}^2$ un sous-ensemble de $\mathbb{R}^2$, qui représente le domaine spatial, et $[0,T] \subset \mathbb{R}$ un ensemble du temps, qui représente chaque date, où $T$ est le nombre de jours observés.
 
-$$X^*(s) = \frac{1}{1 - F_s(X(s))}$$
+On définit l'**ensemble d'excursion** de $X$ pour un seuil $u$ :
 
-qui standardise l'hétérogénéité spatiale des marges, on étudie les **ensembles d'excursion** $E_X(u(s,\alpha))$, c'est-à-dire les régions où le champ dépasse un seuil donné, et leurs fonctionnelles géométriques :
+$$E_X(u,t) = \{s \in D \mid X(s,t) > u\}.$$
+
+### Choix du seuil
+
+Deux types de seuil sont utilisés pour définir ces ensembles :
+
+- **seuil global constant** : un seuil unique $u(\alpha) = \hat{q}_\alpha(\{X(s,t) : s \in D, t \in [0,T]\})$, calculé sur l'ensemble des valeurs (toutes localisations et toutes dates confondues) ;
+- **seuil spatial** : un seuil propre à chaque localisation, $u(\alpha, s) = \hat{q}_\alpha(\{X(s,t) : t \in [0,T]\})$, calculé à partir des seules observations temporelles au point $s$. Ce seuil s'adapte à la climatologie locale de chaque point de la grille plutôt que d'imposer un niveau uniforme sur tout le domaine.
+
+On s'intéresse aux fonctionnelles géométriques de l'ensemble d'excursion pour chaque date $t$ :
 
 - l'**aire** $A_t$,
 - le **périmètre** $P_t$,
 - le **nombre de composantes connexes** $N_t$,
 - le **rayon maximal du disque inscrit** $R_{\max,t}$.
 
-L'objectif est de caractériser la dynamique temporelle de ces ensembles (modélisation AR(1), extremogramme pour la dépendance de queue) et de valider la méthodologie par une approche **peaks-over-threshold (POT)** pour les précipitations, avec des QQ-plots exponentiels ($Z = \log X^* \sim \text{Exp}(1)$).
+### Transformation de Pareto
+
+Après une **transformation de Pareto marginale**
+
+$$X^*(s) = \frac{1}{1 - F_s(X(s))}$$
+
+qui standardise l'hétérogénéité spatiale des marges, l'objectif est de caractériser la dynamique temporelle des ensembles d'excursion (modélisation AR(1), extremogramme pour la dépendance de queue) et de valider la méthodologie par une approche **peaks-over-threshold (POT)** pour les précipitations, avec des QQ-plots exponentiels ($Z = \log X^* \sim \text{Exp}(1)$).
 
 La validation est faite hors échantillon : estimation sur la période **1986–2001**, test sur **2002–2005**, avec une classification des stations en "chaud", "froid" ou "neutre" selon les résidus QQ.
 
